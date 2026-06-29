@@ -1,0 +1,479 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: #f8fafc;
+  color: #1f2937;
+}
+
+/* Good Solutions Colors */
+:root {
+  --navy-primary: #1e3a8a;
+  --navy-light: #3b82f6;
+  --navy-dark: #1e40af;
+  --gray-50: #f9fafb;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-600: #4b5563;
+  --gray-700: #374151;
+  --gray-900: #111827;
+  --white: #ffffff;
+  --black: #000000;
+}
+
+.modern-font {
+  font-family: 'Inter', sans-serif;
+}
+
+/* Button Styles */
+.btn-primary,
+.gs-primary {
+  background: var(--navy-primary) !important;
+  color: white !important;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-primary:hover,
+.gs-primary:hover {
+  background: var(--navy-dark) !important;
+  color: white !important;
+}
+
+.btn-secondary,
+.gs-secondary {
+  background: white !important;
+  color: var(--navy-primary) !important;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.75rem;
+  font-weight: 500;
+  border: 1px solid var(--navy-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-secondary:hover,
+.gs-secondary:hover {
+  background: var(--gray-50) !important;
+  color: var(--navy-primary) !important;
+}
+
+/* Action button styles */
+.gs-success {
+  background: #10b981 !important;
+  color: white !important;
+}
+
+.gs-success:hover {
+  background: #059669 !important;
+  color: white !important;
+}
+
+.gs-danger {
+  background: #ef4444 !important;
+  color: white !important;
+}
+
+.gs-danger:hover {
+  background: #dc2626 !important;
+  color: white !important;
+}
+
+.gs-accent {
+  background: #f59e0b !important;
+  color: white !important;
+}
+
+.gs-accent:hover {
+  background: #d97706 !important;
+  color: white !important;
+}
+
+/* Button text override - FORCE white text in primary buttons */
+.btn-primary *,
+.gs-primary *,
+.gs-success *,
+.gs-danger *,
+.gs-accent * {
+  color: white !important;
+}
+
+.btn-secondary *,
+.gs-secondary * {
+  color: var(--navy-primary) !important;
+}
+
+/* Input Styles */
+.input-field {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--gray-300);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  background: white;
+  color: var(--gray-900) !important;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--navy-primary);
+  box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1);
+}
+
+/* Card Styles */
+.card {
+  background: white;
+  border-radius: 0.75rem;
+  border: 1px solid var(--gray-200);
+  transition: all 0.2s ease;
+}
+
+.card:hover {
+  border-color: var(--gray-300);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Text Colors */
+.text-primary {
+  color: var(--navy-primary) !important;
+}
+
+.text-gray {
+  color: var(--gray-600) !important;
+}
+
+.text-dark {
+  color: var(--gray-900) !important;
+}
+
+.text-white {
+  color: var(--white) !important;
+}
+
+/* Modal specific styles */
+.modal-header {
+  background: var(--navy-primary) !important;
+  color: var(--white) !important;
+}
+
+.modal-header h2 {
+  color: var(--white) !important;
+}
+
+.modal-content {
+  background: var(--white) !important;
+  color: var(--gray-900) !important;
+}
+
+/* Footer styles */
+.footer-primary {
+  background: var(--navy-primary) !important;
+  color: var(--white) !important;
+}
+
+.footer-primary p {
+  color: var(--white) !important;
+}
+
+/* Button text override */
+button {
+  color: inherit;
+}
+
+.btn-primary * {
+  color: var(--white) !important;
+}
+
+.btn-secondary * {
+  color: var(--navy-primary) !important;
+}
+
+/* Modern Input Styles */
+.modern-input {
+  width: 100%;
+  padding: 18px 22px !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 12px !important;
+  font-size: 16px !important;
+  transition: all 0.2s ease;
+  background: white !important;
+  color: #1f2937 !important;
+  font-family: 'Inter', sans-serif;
+  min-height: 58px !important;
+  box-shadow: none !important;
+}
+
+.modern-input:focus {
+  outline: none !important;
+  border-color: var(--navy-primary) !important;
+  box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1) !important;
+  border-width: 1px !important;
+}
+
+.modern-input:hover {
+  border-color: #9ca3af !important;
+}
+
+.modern-input::placeholder {
+  color: #9ca3af !important;
+  font-size: 15px !important;
+}
+
+/* Input field override for auth modal */
+.input-field {
+  width: 100%;
+  padding: 18px 22px !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 12px !important;
+  font-size: 16px !important;
+  transition: all 0.2s ease;
+  background: white !important;
+  color: #1f2937 !important;
+  min-height: 58px !important;
+  box-shadow: none !important;
+}
+
+.input-field:focus {
+  outline: none !important;
+  border-color: var(--navy-primary) !important;
+  box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1) !important;
+}
+
+.input-field:hover {
+  border-color: #9ca3af !important;
+}
+
+.input-field::placeholder {
+  color: #9ca3af !important;
+  font-size: 15px !important;
+}
+
+/* Comment textarea specific */
+.comment-textarea {
+  width: 100% !important;
+  padding: 12px 16px !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 8px !important;
+  font-size: 14px !important;
+  transition: all 0.2s ease !important;
+  background: white !important;
+  color: #374151 !important;
+  font-family: 'Inter', sans-serif !important;
+  resize: vertical !important;
+  min-height: 80px !important;
+}
+
+.comment-textarea:focus {
+  outline: none !important;
+  border-color: var(--navy-primary) !important;
+  box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1) !important;
+}
+
+/* Modal header full width */
+.modal-header-full {
+  background: var(--navy-primary) !important;
+  color: white !important;
+  width: 100% !important;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 1.5rem !important;
+  border-radius: 1rem 1rem 0 0 !important;
+}
+
+.modal-header-full h2 {
+  color: white !important;
+  margin: 0 !important;
+  flex: 1 !important;
+  padding-right: 1rem !important;
+}
+
+.modal-header-full button {
+  background: rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+  border: none !important;
+  padding: 0.5rem !important;
+  border-radius: 0.5rem !important;
+  transition: background-color 0.2s ease !important;
+  flex-shrink: 0 !important;
+}
+
+.modal-header-full button:hover {
+  background: rgba(255, 255, 255, 0.3) !important;
+}
+
+/* Remove any default browser styling */
+input[type="text"].modern-input,
+input[type="email"].modern-input,
+input[type="password"].modern-input,
+input[type="tel"].modern-input,
+select.modern-input,
+textarea.modern-input {
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  appearance: none !important;
+  border: 1px solid #d1d5db !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+input[type="text"].modern-input:focus,
+input[type="email"].modern-input:focus,
+input[type="password"].modern-input:focus,
+input[type="tel"].modern-input:focus,
+select.modern-input:focus,
+textarea.modern-input:focus {
+  border: 1px solid var(--navy-primary) !important;
+  box-shadow: 0 0 0 3px rgba(30, 58, 138, 0.1) !important;
+  outline: none !important;
+}
+
+/* File Upload Area */
+.file-upload-area {
+  border: 2px dashed #d1d5db;
+  border-radius: 12px;
+  padding: 32px;
+  text-align: center;
+  background: #f9fafb;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.file-upload-area:hover {
+  border-color: var(--navy-primary);
+  background: #f0f9ff;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(30, 58, 138, 0.1);
+}
+
+.file-upload-area.drag-over {
+  border-color: var(--navy-primary);
+  background: #dbeafe;
+  transform: scale(1.01);
+  box-shadow: 0 8px 25px rgba(30, 58, 138, 0.15);
+  border-style: solid;
+}
+
+.file-upload-area.drag-over::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 12px;
+  background: rgba(30, 58, 138, 0.05);
+  pointer-events: none;
+}
+
+/* Modern Table Styles */
+.modern-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.modern-table th {
+  background: #f8fafc;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  padding: 16px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.modern-table td {
+  padding: 16px;
+  border-bottom: 1px solid #f1f5f9;
+  vertical-align: top;
+}
+
+.modern-table tr:hover {
+  background: #f8fafc;
+}
+
+/* Category Pills */
+.category-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 500;
+  margin: 2px;
+  color: white;
+}
+
+/* Stats Display */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.stat-item {
+  text-align: center;
+  padding: 8px;
+  background: #f8fafc;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.stat-value {
+  font-weight: 600;
+  color: #1e40af;
+  display: block;
+}
+
+.stat-label {
+  color: #64748b;
+  font-size: 10px;
+}
+/* Clean scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--gray-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gray-300);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gray-600);
+}
+
+/* Remove line-clamp utilities if causing issues */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
