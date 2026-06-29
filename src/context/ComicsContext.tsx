@@ -122,20 +122,20 @@ export function ComicsProvider({ children }: { children: ReactNode }) {
     // Get active rounds that have passed end date
     const { data: expiredRounds, error } = await supabase
       .from('voting_rounds')
-      .select(`
-        id, end_date,
-        wishlist_topics!round_id(
-          id, title, 
-          wishlist_votes(user_id)
-        )
-      `)
+      .select('id, end_date')
       .eq('status', 'active')
       .lt('end_date', new Date().toISOString());
 
     if (error || !expiredRounds?.length) return;
 
     for (const round of expiredRounds) {
-      await completeRound(round);
+      // Fetch topics for this round separately
+      const { data: topics } = await supabase
+        .from('wishlist_topics')
+        .select('id, title, wishlist_votes(user_id)')
+        .eq('round_id', round.id);
+
+      await completeRound({ ...round, wishlist_topics: topics || [] });
     }
 
     // Reload data after completing rounds
@@ -291,13 +291,12 @@ export function ComicsProvider({ children }: { children: ReactNode }) {
 
   const loadWinnerTopics = async () => {
     if (connectionError) return;
-    
+
     const { data, error } = await supabase
       .from('wishlist_topics')
       .select(`
         *,
         wishlist_votes(user_id),
-        voting_rounds!round_id(end_date),
         comics!published_comic_id(id, title)
       `)
       .in('status', ['winner', 'published'])
@@ -307,6 +306,19 @@ export function ComicsProvider({ children }: { children: ReactNode }) {
       console.error('Error loading winner topics:', error);
       setConnectionError(true);
       return;
+    }
+
+    // Fetch round end_dates separately for topics that have a round_id
+    const roundIds = [...new Set(data.map((t: any) => t.round_id).filter(Boolean))];
+    let roundEndDates: Record<string, string> = {};
+    if (roundIds.length > 0) {
+      const { data: rounds } = await supabase
+        .from('voting_rounds')
+        .select('id, end_date')
+        .in('id', roundIds);
+      if (rounds) {
+        rounds.forEach((r: any) => { roundEndDates[r.id] = r.end_date; });
+      }
     }
 
     const mappedWinners: WinnerTopic[] = data.map(topic => ({
@@ -321,7 +333,9 @@ export function ComicsProvider({ children }: { children: ReactNode }) {
       status: topic.status as 'winner' | 'published',
       roundId: topic.round_id,
       publishedComicId: topic.published_comic_id,
-      winningDate: topic.voting_rounds?.[0]?.end_date?.split('T')[0] || topic.created_at.split('T')[0],
+      winningDate: topic.round_id && roundEndDates[topic.round_id]
+        ? roundEndDates[topic.round_id].split('T')[0]
+        : topic.created_at.split('T')[0],
       originalVotes: topic.wishlist_votes?.length || 0
     }));
 
