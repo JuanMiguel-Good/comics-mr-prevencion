@@ -14,7 +14,7 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     detectSessionInUrl: true,
     storage: typeof window !== 'undefined' ? window.localStorage : undefined,
     storageKey: 'mr-prevencion-auth', // ← mismo key en todas las apps = sesión compartida
-    flowType: 'pkce',
+    flowType: 'implicit',
   },
 });
 
