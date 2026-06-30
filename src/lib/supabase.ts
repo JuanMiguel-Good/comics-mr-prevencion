@@ -7,13 +7,30 @@ if (!supabaseUrl || !supabaseAnonKey) {
   throw new Error('Faltan variables de entorno de Supabase.');
 }
 
+const cookieStorage = {
+  getItem(key: string): string | null {
+    if (typeof document === 'undefined') return null;
+    const match = document.cookie.match(new RegExp('(?:^|; )' + key.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '=([^;]*)'));
+    return match ? decodeURIComponent(match[1]) : null;
+  },
+  setItem(key: string, value: string): void {
+    if (typeof document === 'undefined') return;
+    const maxAge = 60 * 60 * 24 * 365;
+    document.cookie = `${key}=${encodeURIComponent(value)}; max-age=${maxAge}; domain=.mrprevencion.app; path=/; Secure; SameSite=Lax`;
+  },
+  removeItem(key: string): void {
+    if (typeof document === 'undefined') return;
+    document.cookie = `${key}=; max-age=0; domain=.mrprevencion.app; path=/; Secure; SameSite=Lax`;
+  },
+};
+
 export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
   auth: {
     autoRefreshToken: true,
     persistSession: true,
     detectSessionInUrl: true,
-    storage: typeof window !== 'undefined' ? window.localStorage : undefined,
-    storageKey: 'mr-prevencion-auth', // ← mismo key en todas las apps = sesión compartida
+    storage: cookieStorage,
+    storageKey: 'mr-prevencion-auth',
     flowType: 'implicit',
   },
 });
